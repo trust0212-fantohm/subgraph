@@ -1,0 +1,26 @@
+{
+  "name": "nft-minter-subgraph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "yarn prepare:dev && yarn codegen && graph build",
+    "build:local": "yarn prepare:local && yarn codegen && graph build",
+    "prepare:main": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:main": "goldsky subgraph deploy nft-subgraph-main/1.0.0 --path .",
+    "prepare:dev": "mustache config/sepolia.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:dev": "goldsky subgraph deploy nft-subgraph-dev/1.0.0 --path .",
+    "create-local": "graph create --node http://localhost:8020/ nft-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ nft-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 nft-subgraph",
+    "deploy-thegraph": "graph deploy --studio nft-subgraph-test",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.51.0",
+    "@graphprotocol/graph-ts": "0.31.0"
+  },
+  "devDependencies": {
+    "matchstick-as": "^0.6.0",
+    "mustache": "^4.0.1"
+  }
+}

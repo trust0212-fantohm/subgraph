@@ -1,0 +1,25 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: NFT
+    kind: ethereum/contract
+    network: {{network}}
+    source:
+      abi: NFT
+      address: "{{NFT.address}}"
+      startBlock: {{NFT.block}}
+    mapping:
+      file: ./src/mappings/NFT.ts
+      language: wasm/assemblyscript
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      entities:
+        - User
+        - NFT
+      abis:
+        - name: NFT
+          file: ./abis/NFT.json
+      eventHandlers:
+        - event: NFTMinted(indexed address,uint256)
+          handler: handleNFTMint

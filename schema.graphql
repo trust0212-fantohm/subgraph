@@ -1,0 +1,13 @@
+type User @entity {
+  "User's Ethereum address as a hex-string"
+  id: ID!
+  totalMintedNFTCount: Int!
+  nfts: [NFT!] @derivedFrom(field: "owner")
+}
+
+type NFT @entity {
+  "NFT Id"
+  id: ID!
+  tokenId: BigInt!
+  owner: User!
+}
